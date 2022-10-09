@@ -1,0 +1,17 @@
+expname = vae1
+
+model_type = VAE
+dataset_type = MNIST
+data_path = data
+log_path = logs
+
+z_size = 128
+
+enc_learning_rate = 0.001
+dec_learning_rate = 0.001
+enc_gamma = 0.99
+dec_gamma = 0.99
+epochs = 100
+batch_size = 512
+eval_num = 64
+eval_interval = 1

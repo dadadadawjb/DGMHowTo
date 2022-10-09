@@ -1,0 +1,18 @@
+expname = gan1
+
+model_type = GAN
+dataset_type = MNIST
+data_path = data
+log_path = logs
+
+z_size = 128
+
+gen_learning_rate = 0.0003
+dis_learning_rate = 0.0002
+gen_gamma = 0.990
+dis_gamma = 0.985
+epochs = 200
+batch_size = 512
+k = 1
+eval_num = 64
+eval_interval = 2
