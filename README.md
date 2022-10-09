@@ -21,16 +21,24 @@ python train_*.py --config configs/*.txt
 ## Results
 ### GAN
 * loss process graph
+
 ![gan_loss](assets/gan_train_loss.png)
+
 * noise generation process
+
 ![gan_generation](assets/gan_train_eval_generation.gif)
+
 * noise discriminator accuracy process
+
 ![gan_accuracy](assets/gan_train_eval_acc.png)
 
 ### VAE
 * loss process graph
+
 ![vae_loss](assets/vae_train_loss.png)
+
 * noise generation process
+
 ![vae_generation](assets/vae_train_eval_generation.gif)
 
 ## Note
