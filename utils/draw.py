@@ -5,10 +5,13 @@ import imageio
 import matplotlib.pyplot as plt
 import numpy as np
 
-def save_gif(image_list:list, path:str, dataset_type:str) -> None:
+def save_gif(image_list:list, path:str, dataset_type:str, normalize:bool) -> None:
     to_pil_image = transforms.ToPILImage()
     if dataset_type == "MNIST":
-        frames = [np.array(to_pil_image(make_grid(torch.min(torch.max(image * 0.3081 + 0.1307, torch.zeros_like(image)), torch.ones_like(image))))) for image in image_list]
+        if normalize:
+            frames = [np.array(to_pil_image(make_grid(torch.min(torch.max(image * 0.3081 + 0.1307, torch.zeros_like(image)), torch.ones_like(image))))) for image in image_list]
+        else:
+            frames = [np.array(to_pil_image(make_grid(torch.min(torch.max(image, torch.zeros_like(image)), torch.ones_like(image))))) for image in image_list]
     else:
         raise NotImplementedError
     imageio.mimsave(path, frames)

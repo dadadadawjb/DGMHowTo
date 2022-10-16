@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import torch.optim as optim
 import numpy as np
 import os
@@ -15,7 +16,7 @@ from utils.seed import setup_seed
 def criterion(x:torch.Tensor, x_hat:torch.Tensor, mean:torch.Tensor, logvar:torch.Tensor) -> torch.Tensor:
     # reconstruction loss
     # recons_loss = nn.functional.binary_cross_entropy(x_hat, x, reduction='sum')     # standard implementation, but assume original distribution is Bernoulli or Multinomial
-    recons_loss = nn.functional.mse_loss(x_hat, x, reduction='sum')                 # alternative implementation, but assume original distribution is Gaussian
+    recons_loss = F.mse_loss(x_hat, x, reduction='sum')                 # alternative implementation, but assume original distribution is Gaussian
     # KL divergence
     kl_loss = -0.5 * torch.sum(1 + logvar - mean.pow(2) - logvar.exp())
 
@@ -55,7 +56,7 @@ if __name__ == "__main__":
         num_channel = 1
         num_height = 28
         num_width = 28
-        train_dataloader = load_mnist(args.data_path, args.batch_size)
+        train_dataloader = load_mnist(args.data_path, args.batch_size, True)
     else:
         raise NotImplementedError
     print("finish initializing dataset")
@@ -122,7 +123,7 @@ if __name__ == "__main__":
     print("start saving results")
     torch.save(encoder.state_dict(), os.path.join(args.log_path, args.expname, 'train', 'encoder.pth'))
     torch.save(decoder.state_dict(), os.path.join(args.log_path, args.expname, 'train', 'decoder.pth'))
-    save_gif(image_list, os.path.join(args.log_path, args.expname, 'train', 'train_eval_process.gif'), args.dataset_type)
+    save_gif(image_list, os.path.join(args.log_path, args.expname, 'train', 'train_eval_process.gif'), args.dataset_type, True)
     draw_line(loss_list, 1, title='train_loss', xlabel='epoch', ylabel='loss', 
                 path=os.path.join(args.log_path, args.expname, 'train', 'train_loss.png'), ylimit=False)
     log_file.close()

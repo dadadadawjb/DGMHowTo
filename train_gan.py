@@ -75,7 +75,7 @@ if __name__ == "__main__":
         num_channel = 1
         num_height = 28
         num_width = 28
-        train_dataloader = load_mnist(args.data_path, args.batch_size)
+        train_dataloader = load_mnist(args.data_path, args.batch_size, True)
     else:
         raise NotImplementedError
     print("finish initializing dataset")
@@ -152,7 +152,7 @@ if __name__ == "__main__":
     print("start saving results")
     torch.save(generator.state_dict(), os.path.join(args.log_path, args.expname, 'train', 'generator.pth'))
     torch.save(discriminator.state_dict(), os.path.join(args.log_path, args.expname, 'train', 'discriminator.pth'))     # actually no need to save discriminator
-    save_gif(image_list, os.path.join(args.log_path, args.expname, 'train', 'generator_eval_process.gif'), args.dataset_type)
+    save_gif(image_list, os.path.join(args.log_path, args.expname, 'train', 'generator_eval_process.gif'), args.dataset_type, True)
     draw_line(acc_list, args.eval_interval, title='discriminator_accuracy', xlabel='epoch', ylabel='accuracy', 
                 path=os.path.join(args.log_path, args.expname, 'train', 'discriminator_eval_process.png'), ylimit=False)
     draw_lines(g_loss_list, d_loss_list, 'generator_loss', 'discriminator_loss', 1, 

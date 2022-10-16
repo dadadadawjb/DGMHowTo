@@ -1,0 +1,15 @@
+expname = nade1
+
+model_type = NADE
+dataset_type = MNIST
+data_path = data
+log_path = logs
+
+h_size = 500
+
+learning_rate = 0.0001
+gamma = 0.995
+epochs = 100
+batch_size = 512
+eval_num = 64
+eval_interval = 2
